@@ -4,7 +4,7 @@
 import * as React from 'react'
 import VanillaTilt from 'vanilla-tilt'
 
-function Tilt({children}) {
+function Tilte({children}) {
   const tiltRef = React.useRef()
 
   React.useEffect(() => {
@@ -28,9 +28,9 @@ function Tilt({children}) {
 
 function App() {
   return (
-    <Tilt>
+    <Tilte>
       <div className="totally-centered">vanilla-tilt.js</div>
-    </Tilt>
+    </Tilte>
   )
 }
 

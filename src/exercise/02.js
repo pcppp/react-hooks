@@ -20,6 +20,9 @@ function useLocalStorage(
     }
     return typeof defaltValue === 'function' ? defaltValue() : defaltValue
   })
+  // 尽管 useLocalStorage 本身会被重新执行，但 React 钩子有一个特性：它们能够保持状态。
+  // 在 useLocalStorage 中使用的 useState 钩子确保即使 useLocalStorage 被重新调用，
+  // 之前的状态（如从 localStorage 中获取的值）依然会被保留，只要其 key 参数未更改。
   const preKeyRef = React.useRef(key)
   React.useEffect(() => {
     const preKey = preKeyRef.current
@@ -29,7 +32,7 @@ function useLocalStorage(
     preKeyRef.current = key
     window.localStorage.setItem(key, serialize(state))
     // 这里的改变依赖于key和state，所以第二个参数必须附带这两个依赖
-  }, [serialize, state, key]) // 只有name改变时才触发effect
+  }, [serialize, state, key])
   return [state, setState]
 }
 
